@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="StyleV.css" type="text/css"/>
+    <title>Pagina</title>
+
+    <style type="text/css">
+        a{
+            text-decoration: none;
+            color: black;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+    
+        <header>           
+            <img id="foto1" src="imagenes/lo1.png" alt="Este es el logo"/>
+            <img id="foto2" src="imagenes/perro.gif" alt=""/>
+            <h2>Centro Veterinario</h2>
+            <h1>Caninos y Felinos</h1>            
+        </header>
+
+        <nav>
+            <ul>
+                <li><a class="ocultar" id="parar" href="Pagina.html"> Inicio </a> </li>
+                <li><a class="ocultar" href="servicios.html"> Servicios </a> </li>
+                <li><a class="ocultar" href="Productos.html" > Productos </a> </li>
+                <li><a class="ocultar" href="Guarderia.html" > Guarderia </a></li>
+                <li><a class="ocultar" href="Promocion.html" > Promocion </a></li>
+            </ul>
+        
+        </nav>
+
+        <section class="Pagina">
+
+            <h3>Cuidados y Educacion para su Perro</h3>
+
+            <article>
+                <p>
+                    No podemos empezar de otra manera, lo primero que debes hacer con tu mascota es acudir al veterinario. Presta mucha atención a todo lo que dice. Te darán consejos sobre alimentación, desparasitación y cuidados generales. Además del control de salud. Por supuesto, su perro o gato eventualmente odiará ir al veterinario, pero para nosotros están bien y son imprescindibles. <br>
+                </p>
+            </article>
+
+            <article>
+                <p>
+                    Entrenar a un perro requiere entrenamiento y cuidado, te explicamos cómo actuar en cada situación individual y cómo hacer de la convivencia una experiencia agradable para todos. Es necesario tener en cuenta las características de cada raza y brindarle los cuidados adecuados durante las primeras semanas.<br>
+                </p>
+            </article>
+
+            <article>
+                <details id="Mostrar">
+                    <summary id="Menos">Ver más</summary> <br>
+                    <p>
+                        Para enseñarle buenos modales y comportamiento en general, puede ofrecerle sesiones de adiestramiento canino. Como resultado, obtendrá un compañero de vida tranquilo, obediente y amigable. <br> <br>
+                        El perro no necesita lavarse todos los meses si lo limpiamos todos los días, se mantiene limpio y solo necesita lavarse dos veces al año. Si el gato está sano y no sale de casa, no hace falta lavarlo nunca. <br>
+                    </p>
+                </details>
+            </article>
+            
+             <h3>Salir de viaje con su mascota</h3>
+            <article>
+                <p>Si vas a viajar, es importante que lleves contigo la documentación del carné de vacunación de tu mascota por si necesitas acudir al veterinario de forma urgente durante tus vacaciones. No olvides llevarlo con tu collar y llevar contigo una placa de llave en caso de que lo pierdas para que sea fácil de encontrar. <br> <br></p>
+
+                <p>En ningún caso debe haber moderación. Siempre deben estar bien sujetos durante la conducción para garantizar que no interfieran con la conducción o la estabilidad del vehículo. Por ejemplo, un perro no puede moverse libremente en el asiento trasero porque, en caso de accidente, puede salir despedido y lesionar tanto al conductor como al animal.</p>
+            </article>
+
+            <article>
+                <details id="Mostrar">
+                    <summary id="Menos">Ver más</summary> <br>
+                    <p>
+                        Si viaja con mascotas, es una buena idea colocar fundas protectoras en los asientos y el equipaje, ya que la mayoría de los perros sueltan mucho pelo y babean cuando tienen calor. Alfombra y tapicería fáciles de limpiar y frescas.<br> <br>
+                    </p>
+                </details>
+            </article>
+        </section>
+
+        <aside class="form-register">
+            <h4>Agendamiento de Citas</h4>
+        
+            <!-- el <aside> en lugar de un <form> para el funcionamiento del envio-->
+            <form id="agendarCitaForm">
+                <label>Nombre Mascota:</label><br> 
+                <input class="controls" type="text" id="nombre" name="nombre" placeholder="Pon el Nombre Mascota" required><br>
+
+                <label for="Edad">Edad:</label><br>
+                <input class="controls" type="number" id="edad" name="edad" placeholder="Pon la Edad" required><br>
+
+                <label>Raza:</label><br>
+                <input class="controls" type="text" id="raza" name="raza" placeholder="Pon La raza" required><br>
+
+                <label>Fecha Cita:</label><br>
+                <input class="controls" type="date" id="fecha_cita" name="fecha_cita" required><br>
+
+                <label>Hora:</label><br>
+                <input class="controls" type="time" id="hora" name="hora" required><br>
+
+                <label>Email:</label><br>
+                <input class="controls" type="email" id="email" name="email" required><br>
+
+                <input class="botons" type="submit" value="Agendar">
+                <input type="reset" value="Limpiar"><br>
+            </form>
+        
+            <!-- Elemento para mostrar el mensaje de respuesta -->
+            <div id="respuesta"></div>
+        </aside>             
+        
+        <!-- Vincula el archivo JS -->
+        <script src="agendarCita.js"></script>
+    
+        <footer>
+            <h3>Contactenos</h3>
+            <h4>Lineas +507 000-0001 <br>
+            Correo: info@caninosyfelinos.com</h4>
+        
+        </footer>
+       
+    </div>
+
+    <script>
+        var slideIndex = 0;
+    showSlides();
+
+    function showSlides() {
+       var i;
+       var slides = document.getElementsByClassName("mySlides");
+       for (i = 0; i < slides.length; i++) {
+        slides[i].style.display = "none";
+       }
+       slideIndex++;
+       if(slideIndex > slides.length) {slideIndex = 1}
+       slides[slideIndex-1].style.display = "block";
+       setTimeout(showSlides,2000);
+    }
+    </script>
+
+    <div class="social-bar">
+        <a href="https://es-la.facebook.com/" target="_blank" class="icon icon-facebook"> <img src="imagenes/iconF.png" alt=""></a>
+        <a href="https://twitter.com/i/flow/login?input_flow_data=%7B%22requested_variant%22%3A%22eyJsYW5nIjoiZXMifQ%3D%3D%22%7D" target="_blank" class="icon icon-twitter"><img src="imagenes/iconT.png" alt=""></a>
+        <a href="https://www.instagram.com/"  target="_blank" class="icon icon-instagram"><img src="imagenes/iconIN.png" alt=""></a>
+       
+    </div>
+    
+</body>
+</html>
