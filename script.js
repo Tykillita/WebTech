@@ -40,8 +40,6 @@ function quitarBordes() {
 }
 
 
-
-// Asegúrate de que los botones de agregar al carrito estén en el DOM antes de agregarles los event listeners
 document.querySelectorAll(".agregar-carrito").forEach(button => {
     button.addEventListener("click", function () {
         agregarAlCarrito(this);
