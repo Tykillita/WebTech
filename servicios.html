@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="StyleV.css" type="text/css"/>
+    <title>Servicios</title>
+    <style type="text/css">
+        a{
+            text-decoration: none;
+            color: black;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <header> 
+            <img id="foto1" src="imagenes/lo1.png" alt="Este es el logo"/>
+            <img id="foto2" src="imagenes/perro.gif" alt=""/>
+            <h2>Centro Veterinario</h2>
+            <h1>Caninos y Felinos</h1>   
+        </header>
+    <nav>
+        <ul>
+            <li><a class="ocultar" href="index.html" > Inicio </a> </li>
+            <li><a class="ocultar" id="parar" href="servicios.html"> Servicios </a> </li>
+            <li><a class="ocultar" href="Productos.html"> Productos </a> </li>
+            <li><a class="ocultar" href="Guarderia.html"> Guarderia </a></li>
+            <li><a class="ocultar" href="Promocion.html"> Promocion </a></li>
+        </ul>
+    </nav>
+    
+    <section class="servicios_section"> 
+        <article>
+            <img src ="imagenes/foto1.jpg">
+            <h4> Hospitalización<br></h4>
+            <p>Nuestros pacientes están siempre acompañados por veterinarios y auxiliares para hacer más cómoda la estancia y recuperación de tu mascota, y puedas estar más tranquilo si tienes que dejar a tu perro o gato unos días.<br></p>
+        </article>
+
+        <article>
+            <img src ="imagenes/foto2.jpg">
+            <h4> Medicina Preventiva<br></h4>
+            <p>La mayoría de los dueños de mascotas llevan a sus mascotas al médico cuando están gravemente enfermas y requieren un alto costo de tratamiento, que puede ser un tratamiento permanente a corto plazo de por vida, o el pronóstico suele ser malo e incurable.</p>
+        </article>
+
+        <article>
+            <img src ="imagenes/foto3.jpg">
+            <h4> Urgencias veterinarias 24 horas<br></h4>
+            <p>Ofrecemos una amplia gama de servicios para mascotas, desde vacunas de cachorros hasta revisiones de pacientes geriátricos. De guardia las 24 horas del día para garantizar la mejor atención y servicio.</p>
+        </article>
+       </section>
+
+   
+        <aside class="servicios_aside">
+            <div class="slideshow-container">
+            <div class="mySlides fade">
+                <div class="numbertext">1 / 3</div>
+                <img src="imagenes/foto4.jpg" >
+                <div class="text">URGENCIAS 24 HORAS</div>
+         </div>
+         
+         <div class="mySlides fade">
+                <div class="numbertext">2 / 3</div>
+                <img src="imagenes/foto5.jpg" >
+                <div class="text">CIRUGIA</div>
+         </div>
+         
+         <div class="mySlides fade">
+                <div class="numbertext">3 / 3</div>
+                <img src="imagenes/foto6.jpg" >
+                <div class="text">CONSULTA MEDICA</div>
+         </div>
+         <!-- <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
+         <a class="next" onclick="plusSlides(1)">&#10095;</a> -->
+            </div>
+
+            <article>
+                <h6>Nuestros Servicios</h6>
+                <p>Un nuevo concepto en medicina veterinaria, ofrece un servicio integral con modernas instalaciones, procesos claros y transparentes, precios competitivos y un equipo de profesionales especializados en el cuidado de los dueños y sus mascotas.</p>
+            </article>
+        </aside>
+   
+
+    <footer>
+        <h3>Contactenos</h3>
+        <h4>Linea +507 000-0001 <br>
+        Correo: info@caninosyfelinos.com</h4>
+        
+    </footer>
+    </div>
+    <script>
+        var slideIndex = 0;
+    showSlides();
+
+    function showSlides() {
+       var i;
+       var slides = document.getElementsByClassName("mySlides");
+       for (i = 0; i < slides.length; i++) {
+        slides[i].style.display = "none";
+       }
+       slideIndex++;
+       if(slideIndex > slides.length) {slideIndex = 1}
+       slides[slideIndex-1].style.display = "block";
+       setTimeout(showSlides,2000);
+    }
+    </script>
+     
+    <div class="social-bar">
+        <a href="https://es-la.facebook.com/" target="_blank" class="icon icon-facebook"> <img src="imagenes/iconF.png" alt=""></a>
+        <a href="https://twitter.com/i/flow/login?input_flow_data=%7B%22requested_variant%22%3A%22eyJsYW5nIjoiZXMifQ%3D%3D%22%7D" target="_blank" class="icon icon-twitter"><img src="imagenes/iconT.png" alt=""></a>
+        <a href="https://www.instagram.com/"  target="_blank" class="icon icon-instagram"><img src="imagenes/iconIN.png" alt=""></a>
+       
+    </div>
+</body>
+</html>
