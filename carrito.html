@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Carrito de Compras</title>
+    <link rel="stylesheet" href="StyleV.css"> 
+
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f8f9fa;
+            color: #333;
+        }
+
+        header {
+            background-color: #4CAF50;
+            color: white;
+            text-align: center;
+            padding: 1rem 0;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            font-size: 50px;
+            margin-left: 0px;
+            margin-bottom: 10px;
+        }
+
+        header h1 {
+            font-size: 80px;
+            text-align: center;
+            margin-left: 0px;
+            padding: 5px;
+            margin-bottom: 10px;
+            margin-top: 20px;
+        }
+
+        .carrito-contenedor {
+            padding: 20px;
+            max-width: 800px;
+            margin: 20px auto;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .vacío {
+            text-align: center;
+            font-size: 1.2rem;
+            color: #888;
+        }
+
+        .producto-carrito {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+            border-bottom: 1px solid #e0e0e0;
+            padding-bottom: 10px;
+        }
+
+        .img-producto {
+            width: 80px;
+            height: 80px;
+            object-fit: cover;
+            border-radius: 8px;
+            margin-right: 15px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .detalles-producto {
+            flex-grow: 1;
+        }
+
+        .detalles-producto h3 {
+            margin: 0 0 5px;
+            font-size: 1.1rem;
+            color: #4CAF50;
+            text-align: left;
+        }
+
+        .detalles-producto p {
+            margin: 2px 0;
+            font-size: 0.9rem;
+        }
+
+        .btn {
+            display: block;
+            background-color: #4CAF50;
+            color: white;
+            font-size: 16px;
+            font-weight: bold;
+            padding: 10px 20px;
+            margin: 20px auto;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            text-align: center;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            width: 200px;
+        }
+
+        .btn:hover {
+            background-color: #0e5026;
+            box-shadow: 0 6px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .btn:active {
+            background-color: #397d3b;
+            transform: scale(0.98);
+        }
+
+        .boton-cantidad {
+            margin: 0 10px;
+            cursor: pointer;
+            padding: 5px;
+            border-radius: 3px;
+            background-color: #f1f1f1;
+        }
+
+        footer {
+            background-color: #333;
+            color: white;
+            text-align: center;
+            padding: 1rem;
+            margin-top: 20px;
+        }
+
+        footer h3, footer h4 {
+            margin: 5px 0;
+        }
+
+        footer a {
+            color: #4CAF50;
+            text-decoration: none;
+        }
+
+        footer a:hover {
+            text-decoration: underline;
+        }
+
+        .botones-container {
+            display: flex;
+            justify-content: center; 
+            gap: 5px; 
+            margin-top: 20px;
+            margin-left: 150px;
+            margin-right: 150px;
+            
+        }
+
+        .botones-container .btn {
+            width: 15%; 
+            padding: 10px; 
+            text-align: center; 
+            margin: 0;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Carrito de Compras</h1>
+    </header>
+
+    <div id="carrito" class="carrito-contenedor"></div>
+
+    <!-- Contenedor de los botones -->
+    <div class="botones-container">
+        <button id="proceder-compra" class="btn">Proceder con la compra</button>
+        <button id="volver-inicio" class="btn">Volver al inicio</button>
+    </div>
+
+    <footer>
+        <h3>Contáctenos</h3>
+        <h4>Línea: +507 000-0001 <br> Correo: <a href="mailto:info@caninosyfelinos.com">info@caninosyfelinos.com</a></h4>
+        <p>© 2024 Veterinaria Caninos y Felinos</p>
+    </footer>
+
+    <div class="social-bar">
+        <a href="carrito.html" target="_blank" class="icon icon-cart">
+            <img src="imagenes/iconCarrito.png" alt="Carrito">
+        </a>
+        <a href="https://es-la.facebook.com/" target="_blank" class="icon icon-facebook">
+            <img src="imagenes/iconF.png" alt="Facebook">
+        </a>
+        <a href="https://twitter.com/i/flow/login" target="_blank" class="icon icon-twitter">
+            <img src="imagenes/iconT.png" alt="Twitter">
+        </a>
+        <a href="https://www.instagram.com/" target="_blank" class="icon icon-instagram">
+            <img src="imagenes/iconIN.png" alt="Instagram">
+        </a>
+    </div>
+
+    <script>
+        // Mostrar productos del carrito
+        function mostrarCarrito() {
+            let carrito = JSON.parse(localStorage.getItem("carrito")) || [];
+            let carritoDiv = document.getElementById("carrito");
+
+            if (carrito.length === 0) {
+                carritoDiv.innerHTML = "<p class='vacío'>Tu carrito está vacío.</p>";
+            } else {
+                carritoDiv.innerHTML = ""; 
+                carrito.forEach((producto, index) => {
+                    let itemHTML = `
+                        <div class="producto-carrito">
+                            <img src="${producto.imagen}" alt="${producto.nombre}" class="img-producto">
+                            <div class="detalles-producto">
+                                <h3>${producto.nombre}</h3>
+                                <p><strong>Cantidad:</strong> ${producto.cantidad}</p>
+                                <p><strong>Precio:</strong> $${(producto.precio * producto.cantidad).toFixed(2)}</p>
+                            </div>
+                            <div>
+                                <button class="boton-cantidad" onclick="actualizarCantidad(${index}, 'restar')">-</button>
+                                <button class="boton-cantidad" onclick="actualizarCantidad(${index}, 'sumar')">+</button>
+                                <button class="boton-cantidad" onclick="eliminarProducto(${index})">Eliminar</button>
+                            </div>
+                        </div>
+                    `;
+                    carritoDiv.innerHTML += itemHTML;
+                });
+            }
+        }
+
+        // Actualizar cantidad de un producto
+        function actualizarCantidad(index, accion) {
+            let carrito = JSON.parse(localStorage.getItem("carrito")) || [];
+            if (accion === 'sumar') {
+                carrito[index].cantidad += 1;
+            } else if (accion === 'restar' && carrito[index].cantidad > 1) {
+                carrito[index].cantidad -= 1;
+            }
+            localStorage.setItem("carrito", JSON.stringify(carrito));
+            mostrarCarrito(); 
+        }
+
+        // Eliminar un producto del carrito
+        function eliminarProducto(index) {
+            let carrito = JSON.parse(localStorage.getItem("carrito")) || [];
+            carrito.splice(index, 1); 
+            localStorage.setItem("carrito", JSON.stringify(carrito));
+            mostrarCarrito(); 
+        }
+
+        // Manejo del botón "Proceder con la compra"
+        document.getElementById("proceder-compra").addEventListener("click", function() {
+            let carrito = JSON.parse(localStorage.getItem("carrito")) || [];
+            
+            if (carrito.length === 0) {
+                alert("No puedes proceder con la compra porque tu carrito está vacío.");
+                return; 
+            }
+
+            if (confirm("¿Deseas continuar con la compra?")) {
+                localStorage.removeItem("carrito");
+
+                alert("¡Ya se notificó a la veterinaria! Puede pasar a la tienda para pagar y retirar su producto.");
+                alert("¡Gracias por su interés, vuelva pronto!");
+
+                window.location.href = "index.html";
+            }
+        });
+
+        // Manejo del botón "Volver al inicio"
+        document.getElementById("volver-inicio").addEventListener("click", function() {
+            window.location.href = "index.html"; 
+        });
+
+        mostrarCarrito();
+
+        
+    </script>
+</body>
+</html>

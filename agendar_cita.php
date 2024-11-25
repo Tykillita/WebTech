@@ -4,7 +4,7 @@ header("Access-Control-Allow-Origin: *");
 header("Access-Control-Allow-Methods: POST, GET, OPTIONS");
 header("Access-Control-Allow-Headers: Content-Type");
 
-if ($_SERVER['REQUEST_METHOD'] == 'OPTIONS') {
+if ($_SERVER['REQUEST_METHOD'] == "OPTIONS") {
     exit;
 }
 
@@ -17,9 +17,45 @@ require 'phpmailer/src/SMTP.php';
 require 'phpmailer/src/Exception.php';
 
 use PHPMailer\PHPMailer\PHPMailer;
-use PHPMailer\PHPMailer\Exception;
+use PHPMailer\PHMailer\Exception;
 
-// Verificion si los datos del formulario fueron enviados
+// Configuración de Supabase
+define('SUPABASE_URL', 'https://iukaeqbocpeaegszkpnj.supabase.co');
+define('SUPABASE_KEY', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Iml1a2FlcWJvY3BlYWVnc3prcG5qIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MzI1MTg5OTgsImV4cCI6MjA0ODA5NDk5OH0.Lv79Y3gTFUbrHcdjMCvtZy8is4EBFqrWh3jS72q0Avg');
+
+// Función para insertar datos en Supabase
+function insertarCitaEnSupabase($nombre, $edad, $raza, $fecha_cita, $hora, $email, $token) {
+    $url = SUPABASE_URL . '/rest/v1/citas';  
+    $data = [
+        'nombre' => $nombre,
+        'edad' => $edad,
+        'raza' => $raza,
+        'fecha_cita' => $fecha_cita,  
+        'hora' => $hora,
+        'email' => $email,
+        'token' => $token
+    ];
+
+    $options = [
+        CURLOPT_URL => $url,
+        CURLOPT_RETURNTRANSFER => true,
+        CURLOPT_HTTPHEADER => [
+            "apikey: " . SUPABASE_KEY,
+            "Authorization: Bearer " . SUPABASE_KEY,
+            "Content-Type: application/json"
+        ],
+        CURLOPT_POST => true,
+        CURLOPT_POSTFIELDS => json_encode($data),
+    ];
+
+    $ch = curl_init();
+    curl_setopt_array($ch, $options);
+    $response = curl_exec($ch);
+    curl_close($ch);
+
+    return $response; 
+}
+
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $nombre = $_POST['nombre'];
     $edad = $_POST['edad'];
@@ -53,17 +89,17 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $mail = new PHPMailer(true);
 
     try {
-        // Configuración del servidor SMTP
+        // Configuración del servidor SMTP con Mailgun
         $mail->isSMTP();
-        $mail->Host       = 'smtp.gmail.com';
+        $mail->Host       = 'smtp.mailgun.org'; // Host de Mailgun
         $mail->SMTPAuth   = true;
-        $mail->Username   = 'rmandopareds@gmail.com'; 
-        $mail->Password   = 'onlw rbsi jzyt nkdt';    
+        $mail->Username   = 'postmaster@web-centroveterinario.vercel.app'; // Usuario (tu correo de Mailgun)
+        $mail->Password   = '856893aa1cea4b9bcc0b575539e11691-c02fd0ba-707e30f41'; // Clave API de Mailgun
         $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
         $mail->Port       = 587;
 
-        $mail->setFrom('rmandopareds@gmail.com', 'Centro Veterinario');
-        $mail->addAddress('drpino03@gmail.com', 'Dr. Pino'); 
+        $mail->setFrom('rmandopareds@gmail.com', 'Centro Veterinario'); // Correo del centro veterinario
+        $mail->addAddress('drpino03@gmail.com', 'Dr. Pino'); // Correo del doctor
 
         // Contenido del correo
         $mail->isHTML(true);
@@ -78,7 +114,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                         . 'Hora de la Cita: ' . $hora . '<br>'
                         . 'Correo del Cliente: ' . $email . '<br><br>'
                         . 'Por favor, confirma tu disponibilidad para esta cita:<br>'
-                        . '<a href="http://localhost/Pagina-Veterinaria-main/confirmar_disponibilidad.php?token=' . urlencode($token) . '&fecha_inicio=' . urlencode($fechaInicio) . '&fecha_fin=' . urlencode($fechaFin) . '&nombre=' . urlencode($nombre) . '&raza=' . urlencode($raza) . '&edad=' . urlencode($edad) . '&email=' . urlencode($email) . '">Confirmar Disponibilidad</a>';
+                        . '<a href="https://web-centroveterinario.vercel.app/confirmar_disponibilidad.php?token=' . urlencode($token) . '&fecha_inicio=' . urlencode($fechaInicio) . '&fecha_fin=' . urlencode($fechaFin) . '&nombre=' . urlencode($nombre) . '&raza=' . urlencode($raza) . '&edad=' . urlencode($edad) . '&email=' . urlencode($email) . '">Confirmar Disponibilidad</a>';
 
         $mail->addAttachment($icsFilePath, 'Cita_Veterinaria.ics');
 
@@ -87,19 +123,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         
         unlink($icsFilePath);
 
-        // Token en un archivo temporal (simulando una base de datos simple)
-        $tokenFile = sys_get_temp_dir() . '/cita_tokens/' . $token;
-        if (!is_dir(dirname($tokenFile))) {
-            mkdir(dirname($tokenFile), 0777, true);
-        }
-        file_put_contents($tokenFile, json_encode([
-            'nombre' => $nombre,
-            'raza' => $raza,
-            'edad' => $edad,
-            'fecha_inicio' => $fechaInicio,
-            'fecha_fin' => $fechaFin,
-            'email' => $email
-        ]));
+        // Insertar en Supabase
+        $response = insertarCitaEnSupabase($nombre, $edad, $raza, $fecha_cita, $hora, $email, $token);
+        // Puedes procesar la respuesta aquí si es necesario
+
     } catch (Exception $e) {
         echo "Hubo un error al enviar el correo: {$mail->ErrorInfo}";
     }

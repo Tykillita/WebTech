@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="StyleV.css" type="text/css"/>
     <title>Productos</title>
     <style type="text/css">
-        a{
+        a {
             text-decoration: none;
             color: black;
         }
@@ -15,170 +15,156 @@
 </head>
 
 <body>
+
     <div class="container">
-    
         <header> 
-            <img id="foto1" src="imagenes/lo1.png" alt="Este es el logo"/>
+            <img id="foto1" src="imagenes/lo1.png" alt="Logo Centro Veterinario"/>
             <img id="foto2" src="imagenes/perro.gif" alt=""/>
             <h2 id="titulo2">Centro Veterinario</h2>
             <h1 id="titulo1">Caninos y Felinos</h1>
-
         </header>
+
         <nav class="Productos_nav">
             <ul>
-                <li><a class="ocultar" href="index.html"> Inicio </a> </li>
-                <li><a class="ocultar" href="servicios.html"> Servicios </a> </li>
-                <li><a id="parar"  class="ocultar" href="Productos.html"> Productos </a> </li>
-                <li><a class="ocultar" href="Guarderia.html"> Guarderia </a></li>
-                <li><a class="ocultar" href="Promocion.html"> Promocion </a></li>
+                <li><a class="ocultar" href="index.html">Inicio</a></li>
+                <li><a class="ocultar" href="servicios.html">Servicios</a></li>
+                <li><a id="parar" class="ocultar" href="Productos.html">Productos</a></li>
+                <li><a class="ocultar" href="Guarderia.html">Guardería</a></li>
+                <li><a class="ocultar" href="Promocion.html">Promoción</a></li>
             </ul>
         </nav>
+
         <section class="contenido">
             <div class="mostrador" id="mostrador">
                 <div class="fila">
-                    <div class="item" onclick="cargar(this)">
+                    <div class="item" onclick="cargar(this)" data-id="1" data-nombre="Nutrecan 2kg" data-precio="30.20">
                         <div class="contenedor-foto">
-                            <img src="imagenes/c2.png" alt="">
+                            <img src="imagenes/c2.png" alt="Nutrecan 2kg">
                         </div>
-                        <p class="descripcion">Nutrecan <br>
-                        2kg</p>
-                        <span class="precio">$ 30.20</span>
+                        <p class="descripcion">Nutrecan <br>2kg</p>
+                        <span class="precio">$30.20</span>
                     </div>
-                    <div class="item" onclick="cargar(this)">
+                    <div class="item" onclick="cargar(this)" data-id="2" data-nombre="Nutrecan 4kg" data-precio="48.80">
                         <div class="contenedor-foto">
-                            <img src="imagenes/c3.png"alt="">
+                            <img src="imagenes/c3.png" alt="Nutrecan 4kg">
                         </div>
-                        <p class="descripcion" id>Nutrecan <br>
-                        4kg</p>
-                        <span class="precio">$ 48.80</span>
+                        <p class="descripcion">Nutrecan <br>4kg</p>
+                        <span class="precio">$48.80</span>
                     </div>
-                    <div class="item" onclick="cargar(this)">
+                    <div class="item" onclick="cargar(this)" data-id="3" data-nombre="Nutrecan 5kg" data-precio="53.99">
                         <div class="contenedor-foto">
-                            <img src="imagenes/c4.png" alt="">
+                            <img src="imagenes/c4.png" alt="Nutrecan 5kg">
                         </div>
-                        <p class="descripcion">Nutrecan <br>
-                        2kg</p>
-                        <span class="precio">$ 22.99</span>
+                        <p class="descripcion">Nutrecan <br>5kg</p>
+                        <span class="precio">$53.99</span>
                     </div>
-                    <div class="item" onclick="cargar(this)">
+                    <div class="item" onclick="cargar(this)" data-id="4" data-nombre="Nutrecan 8kg" data-precio="85.99">
                         <div class="contenedor-foto">
-                            <img src="imagenes/c5.png" alt="">
+                            <img src="imagenes/c5.png" alt="Nutrecan 8kg">
                         </div>
-                        <p class="descripcion">Nutrecan <br>
-                        2kg</p>
-                        <span class="precio">$ 29.99</span>
+                        <p class="descripcion">Nutrecan <br>8kg</p>
+                        <span class="precio">$85.99</span>
                     </div>
-                    
-                    
                 </div>
                 <div class="fila">
-                    <div class="item" onclick="cargar(this)">
+                    <div class="item" onclick="cargar(this)" data-id="5" data-nombre="PETYS Paños Húmedos 50u" data-precio="10.50">
                         <div class="contenedor-foto">
-                            <img src="imagenes/h1.png" alt="">
+                            <img src="imagenes/h1.png" alt="PETYS Paños Húmedos 50u">
                         </div>
-                        <p class="descripcion">PETYS <br>
-                            Paños humenos 50u</p>
-                        
-                        <span class="precio">$ 10.50</span>
+                        <p class="descripcion">PETYS <br>Paños Húmedos 50u</p>
+                        <span class="precio">$10.50</span>
                     </div>
-                    <div class="item" onclick="cargar(this)">
+                    <div class="item" onclick="cargar(this)" data-id="6" data-nombre="PETYS Paños Húmedos 40u" data-precio="8.99">
                         <div class="contenedor-foto">
-                            <img src="imagenes/h2.png" alt="">
+                            <img src="imagenes/h2.png" alt="PETYS Paños Húmedos 40u">
                         </div>
-                        <p class="descripcion">PETYS <br>
-                            Paños humenos 40u</p>
-                        <span class="precio">$ 8.99</span>
+                        <p class="descripcion">PETYS <br>Paños Húmedos 40u</p>
+                        <span class="precio">$8.99</span>
                     </div>
-                    <div class="item" onclick="cargar(this)">
+                    <div class="item" onclick="cargar(this)" data-id="7" data-nombre="PETYS Shampoo" data-precio="14.99">
                         <div class="contenedor-foto">
-                            <img src="imagenes/h3.png" alt="">
+                            <img src="imagenes/h3.png" alt="PETYS Shampoo">
                         </div>
-                        <p class="descripcion">PETYS <br>
-                            Shampoo</p>
-                        <span class="precio">$ 14.99</span>
+                        <p class="descripcion">PETYS <br>Shampoo</p>
+                        <span class="precio">$14.99</span>
                     </div>
-                    <div class="item" onclick="cargar(this)">
+                    <div class="item" onclick="cargar(this)" data-id="8" data-nombre="PETYS Tapetes Absorbentes" data-precio="24.99">
                         <div class="contenedor-foto">
-                            <img src="imagenes/h4.png" alt="">
+                            <img src="imagenes/h4.png" alt="PETYS Tapetes Absorbentes">
                         </div>
-                        <p class="descripcion">PETYS <br>
-                           Tapetes absorbentes</p>
+                        <p class="descripcion">PETYS <br>Tapetes Absorbentes</p>
                         <span class="precio">$24.99</span>
                     </div>
-                    
-                   
-                </div> 
-                <div class="fila">
-                    <div class="item" onclick="cargar(this)">
-                        <div class="contenedor-foto">
-                            <img src="imagenes/p5.png" alt="">
-                        </div>
-                        <p class="descripcion">Liquamox® C <br>
-                            Antibiótico betalactámico</p>
-                        <span class="precio">$ 78.90</span>
-                    </div>
-                    <div class="item" onclick="cargar(this)">
-                        <div class="contenedor-foto">
-                            <img src="imagenes/p6.png" alt="">
-                        </div>
-                        <p class="descripcion">Liquamox® 6X <br>
-                            Antibiótico-Antimicótico-Antiinflamatorio-Anestésico</p>
-                        <span class="precio">$ 80.99</span>
-                    </div>
-                    <div class="item" onclick="cargar(this)">
-                        <div class="contenedor-foto">
-                            <img src="imagenes/p7.png" alt="">
-                        </div>
-                        <p class="descripcion">ProGuard® 4<br>
-                            Antiparasitario de amplio espectro</p>
-                        <span class="precio">$ 85.50</span>
-                    </div>
-                    <div class="item" onclick="cargar(this)">
-                        <div class="contenedor-foto">
-                            <img src="imagenes/p8.png" alt="">
-                        </div>
-                        <p class="descripcion">Proventis® 10<br>
-                            Ectoparasiticida en tabletas palatables</p>
-                        <span class="precio">$ 102.99</span>
-                    </div>
-                    
-                   
-                </div> 
-            </div>
-            <div class="seleccion" id="seleccion">
-                <div class="cerrar" onclick="cerrar()">
-                    &#x2715
                 </div>
-                <div class="info">
-                    <img src="imagenes/c2.png" alt="" id="img">
-                    <h2 id="modelo">NIKE MODEL 1</h2>
-                    <p id="descripcion">Descripción Modelo 1</p>
+                <div class="fila">
+                    <div class="item" onclick="cargar(this)" data-id="9" data-nombre="Liquamox® C" data-precio="78.90">
+                        <div class="contenedor-foto">
+                            <img src="imagenes/p5.png" alt="Liquamox® C">
+                        </div>
+                        <p class="descripcion">Liquamox® C <br>Antibiótico betalactámico</p>
+                        <span class="precio">$78.90</span>
+                    </div>
+                    <div class="item" onclick="cargar(this)" data-id="10" data-nombre="Liquamox® 6X" data-precio="80.99">
+                        <div class="contenedor-foto">
+                            <img src="imagenes/p6.png" alt="Liquamox® 6X">
+                        </div>
+                        <p class="descripcion">Liquamox® 6X <br>Antibiótico-Antimicótico</p>
+                        <span class="precio">$80.99</span>
+                    </div>
+                    <div class="item" onclick="cargar(this)" data-id="11" data-nombre="ProGuard® 4" data-precio="85.50">
+                        <div class="contenedor-foto">
+                            <img src="imagenes/p7.png" alt="ProGuard® 4">
+                        </div>
+                        <p class="descripcion">ProGuard® 4 <br>Antiparasitario</p>
+                        <span class="precio">$85.50</span>
+                    </div>
+                    <div class="item" onclick="cargar(this)" data-id="12" data-nombre="Proventis® 10" data-precio="102.99">
+                        <div class="contenedor-foto">
+                            <img src="imagenes/p8.png" alt="Proventis® 10">
+                        </div>
+                        <p class="descripcion">Proventis® 10 <br>Ectoparasiticida</p>
+                        <span class="precio">$102.99</span>
+                    </div>
+                </div>
+            </div>            
 
-                    <span class="precio" id="precio">$ </span>
-    
+            <div class="seleccion" id="seleccion">
+                <div class="cerrar" onclick="cerrar()">&#x2715;</div>
+                <div class="info">
+                    <img src="" alt="" id="img">
+                    <h2 id="modelo">Nombre del Producto</h2>
+                    <p id="descripcion">Descripción del producto</p>
+                    <span class="precio" id="precio">Precio</span>
                     <div class="fila">
-                        <button>AGREGAR AL CARRITO</button>
+                        <button class="agregar-carrito" data-id="" data-nombre="" data-precio="">Agregar al carrito</button>
                     </div>
                 </div>
             </div>
             
         </section>
-    
+
         <footer>
-            <h3>Contactenos</h3>
-            <h4>Linea +507 000-0001 <br>
-            Correo: info@caninosyfelinos.com</h4>
-            
+            <h3>Contáctenos</h3>
+            <h4>Linea +507 000-0001 <br> Correo: <a href="mailto:info@caninosyfelinos.com">info@caninosyfelinos.com</a></h4>
         </footer>
-       
-        <script src="script.js"> </script>
+
     </div>
+
     <div class="social-bar">
-        <a href="https://es-la.facebook.com/" target="_blank" class="icon icon-facebook"> <img src="imagenes/iconF.png" alt=""></a>
-        <a href="https://twitter.com/i/flow/login?input_flow_data=%7B%22requested_variant%22%3A%22eyJsYW5nIjoiZXMifQ%3D%3D%22%7D" target="_blank" class="icon icon-twitter"><img src="imagenes/iconT.png" alt=""></a>
-        <a href="https://www.instagram.com/"  target="_blank" class="icon icon-instagram"><img src="imagenes/iconIN.png" alt=""></a>
-       
+        <a href="carrito.html" target="_blank" class="icon icon-cart">
+            <img src="imagenes/iconCarrito.png" alt="Carrito">
+        </a>
+        <a href="https://es-la.facebook.com/" target="_blank" class="icon icon-facebook">
+            <img src="imagenes/iconF.png" alt="Facebook">
+        </a>
+        <a href="https://twitter.com/i/flow/login" target="_blank" class="icon icon-twitter">
+            <img src="imagenes/iconT.png" alt="Twitter">
+        </a>
+        <a href="https://www.instagram.com/" target="_blank" class="icon icon-instagram">
+            <img src="imagenes/iconIN.png" alt="Instagram">
+        </a>
     </div>
-    
+
+<script src="script.js"></script>    
 </body>
 </html>
