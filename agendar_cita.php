@@ -17,43 +17,11 @@ require 'phpmailer/src/SMTP.php';
 require 'phpmailer/src/Exception.php';
 
 use PHPMailer\PHPMailer\PHPMailer;
-use PHPMailer\PHMailer\Exception;
+use PHPMailer\PHPMailer\Exception;
 
-// Configuración de Supabase
-define('SUPABASE_URL', 'https://iukaeqbocpeaegszkpnj.supabase.co');
-define('SUPABASE_KEY', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Iml1a2FlcWJvY3BlYWVnc3prcG5qIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MzI1MTg5OTgsImV4cCI6MjA0ODA5NDk5OH0.Lv79Y3gTFUbrHcdjMCvtZy8is4EBFqrWh3jS72q0Avg');
-
-// Función para insertar datos en Supabase
-function insertarCitaEnSupabase($nombre, $edad, $raza, $fecha_cita, $hora, $email, $token) {
-    $url = SUPABASE_URL . '/rest/v1/citas';  
-    $data = [
-        'nombre' => $nombre,
-        'edad' => $edad,
-        'raza' => $raza,
-        'fecha_cita' => $fecha_cita,  
-        'hora' => $hora,
-        'email' => $email,
-        'token' => $token
-    ];
-
-    $options = [
-        CURLOPT_URL => $url,
-        CURLOPT_RETURNTRANSFER => true,
-        CURLOPT_HTTPHEADER => [
-            "apikey: " . SUPABASE_KEY,
-            "Authorization: Bearer " . SUPABASE_KEY,
-            "Content-Type: application/json"
-        ],
-        CURLOPT_POST => true,
-        CURLOPT_POSTFIELDS => json_encode($data),
-    ];
-
-    $ch = curl_init();
-    curl_setopt_array($ch, $options);
-    $response = curl_exec($ch);
-    curl_close($ch);
-
-    return $response; 
+// Generación de un token único para la cita
+function generarToken() {
+    return bin2hex(random_bytes(16));
 }
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -84,7 +52,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $icsFilePath = tempnam(sys_get_temp_dir(), 'cita') . '.ics';
     file_put_contents($icsFilePath, $icsContent);
 
-    $token = bin2hex(random_bytes(16));
+    // Generar un token único para la cita
+    $token = generarToken();
 
     $mail = new PHPMailer(true);
 
@@ -122,10 +91,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         echo 'El correo ha sido enviado con éxito';
         
         unlink($icsFilePath);
-
-        // Insertar en Supabase
-        $response = insertarCitaEnSupabase($nombre, $edad, $raza, $fecha_cita, $hora, $email, $token);
-        // Puedes procesar la respuesta aquí si es necesario
 
     } catch (Exception $e) {
         echo "Hubo un error al enviar el correo: {$mail->ErrorInfo}";
