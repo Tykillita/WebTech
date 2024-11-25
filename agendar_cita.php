@@ -67,7 +67,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
         $mail->Port       = 587;
 
-        $mail->setFrom('rmandopareds@gmail.com', 'Centro Veterinario'); // Correo del centro veterinario
+        $mail->setFrom('postmaster@web-centroveterinario.vercel.app', 'Centro Veterinario'); // Correo del centro veterinario
         $mail->addAddress('drpino03@gmail.com', 'Dr. Pino'); // Correo del doctor
 
         // Contenido del correo

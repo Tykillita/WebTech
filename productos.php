@@ -2,14 +2,12 @@
 include 'db.php';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['agregar'])) {
-    // Limpieza de entradas
     $nombre = htmlspecialchars(trim($_POST['nombre']));
     $descripcion = htmlspecialchars(trim($_POST['descripcion']));
     $precio = filter_var($_POST['precio'], FILTER_VALIDATE_FLOAT);
     $stock = filter_var($_POST['stock'], FILTER_VALIDATE_INT);
     $imagen = isset($_POST['imagen']) && !empty($_POST['imagen']) ? htmlspecialchars(trim($_POST['imagen'])) : null;
 
-    // Validación de entradas
     if (!empty($nombre) && !empty($descripcion) && $precio > 0 && $stock >= 0) {
         // Uso de consultas preparadas para evitar inyección SQL
         $stmt = $conn->prepare("INSERT INTO productos (nombre, descripcion, precio, stock, imagen) 
@@ -30,7 +28,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['agregar'])) {
     }
 }
 
-// Cerrar conexión al final del script
 $conn->close();
 ?>
 

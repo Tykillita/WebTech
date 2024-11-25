@@ -8,7 +8,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'OPTIONS') {
     exit;
 }
 
-// Verificar parámetros
 if (!isset($_GET['token']) || !isset($_GET['fecha_inicio']) || !isset($_GET['fecha_fin']) || !isset($_GET['nombre']) || !isset($_GET['raza']) || !isset($_GET['edad']) || !isset($_GET['email'])) {
     die("Faltan parámetros en la solicitud.");
 }
@@ -21,16 +20,13 @@ $raza = $_GET['raza'];
 $edad = $_GET['edad'];
 $email = $_GET['email'];
 
-// Verificar que el token existe
 $tokenFile = sys_get_temp_dir() . '/cita_tokens/' . $token;
 if (!file_exists($tokenFile)) {
     die("Solicitud de confirmación inválida.");
 }
 
-// Leer los datos del token
 $data = json_decode(file_get_contents($tokenFile), true);
 
-// Eliminar el archivo del token
 unlink($tokenFile);
 
 // Configuración del correo para el cliente
@@ -48,13 +44,12 @@ try {
     $mail->isSMTP();
     $mail->Host       = 'smtp.mailgun.org'; // Servidor SMTP de Mailgun
     $mail->SMTPAuth   = true;
-    $mail->Username   = 'postmaster@YOUR_DOMAIN.com'; // Cambia a tu usuario Mailgun
-    $mail->Password   = 'YOUR_API_KEY'; // Cambia a tu clave de API de Mailgun
+    $mail->Username   = 'postmaster@web-centroveterinario.vercel.app'; // Cambia a tu usuario Mailgun
+    $mail->Password   = '856893aa1cea4b9bcc0b575539e11691-c02fd0ba-707e30f41'; // Cambia a tu clave de API de Mailgun
     $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
     $mail->Port       = 587;
 
-    // Configurar el remitente y el destinatario
-    $mail->setFrom('postmaster@YOUR_DOMAIN.com', 'Centro Veterinario'); // Cambia a tu remitente
+    $mail->setFrom('postmaster@web-centroveterinario.vercel.app', 'Centro Veterinario'); // Cambia a tu remitente
     $mail->addAddress($data['email'], 'Cliente');
 
     // Crear el contenido del archivo .ics
@@ -71,11 +66,9 @@ try {
     $icsContent .= "END:VEVENT\r\n";
     $icsContent .= "END:VCALENDAR\r\n";
 
-    // Guardar el contenido en un archivo temporal
     $icsFilePath = tempnam(sys_get_temp_dir(), 'cita') . '.ics';
     file_put_contents($icsFilePath, $icsContent);
 
-    // Configurar el contenido del correo
     $mail->isHTML(true);
     $mail->Subject = 'Disponibilidad del doctor confirmada';
     $mail->Body    = '<b>¡La disponibilidad del doctor ha sido confirmada!</b><br>'
@@ -90,7 +83,6 @@ try {
     // Adjuntar el archivo .ics
     $mail->addAttachment($icsFilePath, 'Cita_Veterinaria.ics');
 
-    // Enviar el correo
     $mail->send();
     echo 'El correo de confirmación ha sido enviado con éxito';
     

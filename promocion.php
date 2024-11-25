@@ -1,11 +1,9 @@
 <?php
 include 'db.php';
 
-// Verificar si la página se está cargando desde PHP
 if (basename($_SERVER['PHP_SELF']) == 'promocion.php') {
-    // Consulta segura para obtener productos en promoción
     $query_promociones = $conn->prepare("SELECT nombre, descripcion, precio, imagen FROM productos WHERE promocion = ?");
-    $promocion_flag = 1; // Valor para identificar promociones
+    $promocion_flag = 1; 
     $query_promociones->bind_param("i", $promocion_flag);
     $query_promociones->execute();
     $result_promociones = $query_promociones->get_result();
@@ -25,16 +23,12 @@ if (basename($_SERVER['PHP_SELF']) == 'promocion.php') {
     }
     $query_promociones->close();
 
-    // Cargar el contenido de promocion.html
     $html = file_get_contents('promocion.html');
 
-    // Reemplazar el marcador {{dinamico}} con el contenido dinámico
     $html = str_replace('{{dinamico}}', $contenido_dinamico, $html);
 
-    // Mostrar la página completa con el contenido dinámico
     echo $html;
 } else {
-    // Si se abre el archivo HTML directamente, simplemente mostrar el archivo
     echo file_get_contents('promocion.html');
 }
 ?>
