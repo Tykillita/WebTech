@@ -74,7 +74,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $mail->isHTML(true);
         $mail->Subject = 'Nueva cita agendada - Confirmar disponibilidad';
 
-        // Datos del formulario en el cuerpo del correo
         $mail->Body    = '<b>¡Nueva cita agendada!</b><br>'
                         . 'Nombre Mascota: ' . $nombre . '<br>'
                         . 'Edad: ' . $edad . ' años<br>'

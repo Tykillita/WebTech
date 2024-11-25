@@ -192,7 +192,6 @@
     </div>
 
     <script>
-        // Mostrar productos del carrito
         function mostrarCarrito() {
             let carrito = JSON.parse(localStorage.getItem("carrito")) || [];
             let carritoDiv = document.getElementById("carrito");
@@ -222,7 +221,6 @@
             }
         }
 
-        // Actualizar cantidad de un producto
         function actualizarCantidad(index, accion) {
             let carrito = JSON.parse(localStorage.getItem("carrito")) || [];
             if (accion === 'sumar') {
@@ -234,7 +232,6 @@
             mostrarCarrito(); 
         }
 
-        // Eliminar un producto del carrito
         function eliminarProducto(index) {
             let carrito = JSON.parse(localStorage.getItem("carrito")) || [];
             carrito.splice(index, 1); 
@@ -242,7 +239,6 @@
             mostrarCarrito(); 
         }
 
-        // Manejo del botón "Proceder con la compra"
         document.getElementById("proceder-compra").addEventListener("click", function() {
             let carrito = JSON.parse(localStorage.getItem("carrito")) || [];
             
@@ -261,7 +257,6 @@
             }
         });
 
-        // Manejo del botón "Volver al inicio"
         document.getElementById("volver-inicio").addEventListener("click", function() {
             window.location.href = "index.html"; 
         });

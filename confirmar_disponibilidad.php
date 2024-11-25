@@ -44,17 +44,17 @@ use PHPMailer\PHPMailer\Exception;
 $mail = new PHPMailer(true);
 
 try {
-    // Configuración del servidor SMTP
+    // Configuración del servidor SMTP de Mailgun
     $mail->isSMTP();
-    $mail->Host       = 'smtp.gmail.com';
+    $mail->Host       = 'smtp.mailgun.org'; // Servidor SMTP de Mailgun
     $mail->SMTPAuth   = true;
-    $mail->Username   = 'rmandopareds@gmail.com'; // Correo de origen
-    $mail->Password   = 'onlw rbsi jzyt nkdt';    // Contraseña de aplicación de Gmail
+    $mail->Username   = 'postmaster@YOUR_DOMAIN.com'; // Cambia a tu usuario Mailgun
+    $mail->Password   = 'YOUR_API_KEY'; // Cambia a tu clave de API de Mailgun
     $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
     $mail->Port       = 587;
 
     // Configurar el remitente y el destinatario
-    $mail->setFrom('rmandopareds@gmail.com', 'Centro Veterinario');
+    $mail->setFrom('postmaster@YOUR_DOMAIN.com', 'Centro Veterinario'); // Cambia a tu remitente
     $mail->addAddress($data['email'], 'Cliente');
 
     // Crear el contenido del archivo .ics
@@ -85,7 +85,7 @@ try {
                     . 'Fecha de la Cita: ' . date('d/m/Y', strtotime($data['fecha_inicio'])) . '<br>'
                     . 'Hora de la Cita: ' . date('H:i', strtotime($data['fecha_inicio'])) . '<br><br>'
                     . 'Puedes agregar esta cita a tu calendario utilizando el archivo adjunto.<br>'
-                    . '<a href="http://localhost/Pagina-Veterinaria-main/Pagina.html">Ver detalles de la cita</a>';
+                    . '<a href="https://web-centroveterinario.vercel.app/index.html">Ver detalles de la cita</a>';
 
     // Adjuntar el archivo .ics
     $mail->addAttachment($icsFilePath, 'Cita_Veterinaria.ics');
@@ -94,28 +94,9 @@ try {
     $mail->send();
     echo 'El correo de confirmación ha sido enviado con éxito';
     
-    // Eliminar el archivo temporal después de enviarlo
     unlink($icsFilePath);
 } catch (Exception $e) {
     echo "Hubo un error al enviar el correo: {$mail->ErrorInfo}";
 }
 
-// Funciones necesarias para implementar todo en base de datos
-
-//function updateCitaStatus($citaId) {
-    // Aquí deberías implementar la lógica para actualizar el estado de la cita en tu base de datos.
-    // Esto es solo un ejemplo:
-    // $pdo = new PDO('mysql:host=localhost;dbname=tu_base_de_datos', 'usuario', 'contraseña');
-    // $stmt = $pdo->prepare("UPDATE citas SET confirmada = 1 WHERE id = ?");
-    // $stmt->execute([$citaId]);
-//}
-
-//function getCitaDetalles($citaId) {
-    // Aquí deberías implementar la lógica para obtener los detalles de la cita desde tu base de datos.
-    // Esto es solo un ejemplo:
-    // $pdo = new PDO('mysql:host=localhost;dbname=tu_base_de_datos', 'usuario', 'contraseña');
-    // $stmt = $pdo->prepare("SELECT * FROM citas WHERE id = ?");
-    // $stmt->execute([$citaId]);
-    // return $stmt->fetch(PDO::FETCH_ASSOC);
-//}
 ?>
