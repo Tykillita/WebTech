@@ -63,6 +63,43 @@ table {
 
 /*Desde aqui comienza*/
 
+/* Estilo general para pantallas grandes */
+body {
+    font-size: 16px;
+    margin: 0;
+    padding: 0;
+}
+
+/* Ajuste para tablets (pantallas medianas) */
+@media (max-width: 768px) {
+    body {
+        font-size: 14px;
+    }
+    .contenedor {
+        flex-direction: column; /* Cambia el diseño a columnas */
+        padding: 10px;
+    }
+}
+
+/* Ajuste para móviles (pantallas pequeñas) */
+@media (max-width: 480px) {
+    body {
+        font-size: 12px;
+    }
+    .contenedor {
+        padding: 5px;
+    }
+    .imagen {
+        width: 100%; /* Las imágenes ocupan todo el ancho */
+        height: auto;
+    }
+    .boton {
+        font-size: 14px;
+        padding: 8px;
+    }
+}
+
+
 div.container{
     margin-right: auto;
     margin-left: auto;
